@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mappings>
+
+	<segment id="macors">
+		<template>
+	<![CDATA[	
+	<#macro constructorDefault className>
+	public ${className}(){
+		super();
+	}		
+	</#macro>
+	
+
+	]]>	
+	</template>	
+	</segment>	
+	
+	<segment id="copyright">
+	<template>
+	<![CDATA[
+/**
+ * Copyright (c) 2016, qhlee. All rights reserved.
+ * qhlee版权所有.
+ *
+ * 审核人:qhlee
+ */
+	]]>	
+	</template>	
+	</segment>
+		
+	
+	<segment id="package">
+		<template>
+	<![CDATA[ 
+	<#if java.pkg??>
+package ${java.pkg};
+	</#if> 
+	]]>	
+	</template>	
+	</segment>
+	
+	<segment id="import">
+	<template>
+	<![CDATA[ 
+	<#if java.imports??>
+	<#list java.imports as item>
+	<#if item??>
+import ${item};
+	</#if>
+	</#list>
+	</#if>
+	]]>	
+	</template>	
+	</segment>
+	
+	<segment id="class-description">
+		<template>
+	<![CDATA[
+/**
+* <pre>
+*
+* ${java.classDescrption!"Code genernated by freemarker auto."}
+* @author qhlee
+* @version v1.0 2016年11月15日
+* @see
+*/
+	]]>	
+	</template>	
+	</segment>	
+	
+	<segment id="class-begin">
+		<template>
+	<![CDATA[
+public class ${java.className} <#if java.superClass??>extends ${java.superClass}<#else>extends java.lang.Object</#if> <#if java.implementions??>implements <#list java.implementions as item>${item},</#list></#if>{	
+	]]>	
+	</template>	
+	</segment>		
+	
+	
+	
+	<segment id="class-end">
+		<template>
+	<![CDATA[
+}	
+	]]>	
+	</template>	
+	</segment>		
+	
+	<mapping id="toJava" parser="bean2TextParser" transformer="bean2TextTransformer">
+	 	<include segment-id="macors"/>
+		<include segment-id="copyright"/>
+		<include segment-id="package"/>
+		<include segment-id="import"/>
+		<include segment-id="class-description"/>
+		<include segment-id="class-begin"/>
+		<include segment-id="class-body"/>
+		<include segment-id="class-end"/>
+	</mapping>
+	
+	<segment id="class-body">
+		<template>
+	<![CDATA[
+<@constructorDefault className="${java.className}"/>
+	]]>	
+	</template>	
+	</segment>	
+</mappings>	

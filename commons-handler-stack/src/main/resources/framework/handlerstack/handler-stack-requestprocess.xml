@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<handler-stacks>
+
+	<stack id="struts2Stack">
+		<handler bean-id="traceHandler" />
+	    <handler bean-id="dumpHandler" />
+		<handler bean-id="exceptionHandler" />
+		<passvalue-handler>
+			<before>
+				<output source="['_message'].head.serviceId" target="['_service_id']" />
+				<output source="['_message'].head.extAttr['request']" target="['_request']" />
+				<output source="['_message'].head.extAttr['requestAttr']"
+					target="['_request_attr']" />
+				<output source="['_message'].head.extAttr['session']" target="['_session']" />
+				<output source="['_message'].head.acceptLanguage" target="['_locale']" />
+				<output source="['_message'].bodyData" target="['_in_data']" />
+			</before>
+		</passvalue-handler>
+		<!--  
+			<handler bean-id="logConfigHandler" />
+		-->
+
+	</stack>
+
+	<stack id="struts2StackForJson">
+		<handler bean-id="traceHandler" />
+	    <handler bean-id="dumpHandler" />
+		<handler bean-id="exceptionHandler" />
+		<passvalue-handler>
+			<before>
+				<output source="['_message'].head.serviceId" target="['_service_id']" />
+				<output source="['_message'].head.extAttr['request']" target="['_request']" />
+				<output source="['_message'].head.extAttr['requestAttr']"
+					target="['_request_attr']" />
+				<output source="['_message'].head.extAttr['session']" target="['_session']" />
+				<output source="['_message'].head.acceptLanguage" target="['_locale']" />
+				<output source="['_request']" target="['_in_data']"
+					mapping-id="json2Bean" />
+			</before>
+			<after>
+				<output source="['_out_data']" target="['_out_data']"
+					mapping-id="bean2Json" />
+			</after>
+		</passvalue-handler>
+		<!--  
+			<handler bean-id="logConfigHandler" />
+		-->
+
+	</stack>
+
+	<stack id="serviceStack">
+		<handler bean-id="traceHandler" />
+		<passvalue-handler>
+			<before>
+				<output source="['_message'].bodyData" target="['_in_data']" />
+			</before>
+		</passvalue-handler>
+		<handler bean-id="dumpHandler" />
+		<handler bean-id="inboundSecurityHeaderHandler" />
+		<handler bean-id="businessRecordHandler" />
+		<handler bean-id="businessReverseHandler" />
+		<handler bean-id="certificateReprintHandler" />
+		<handler bean-id="inboundDataTransformHandler" />
+		<handler bean-id="inboundInternationalHandler" />
+		<handler bean-id="inboundServiceExceptionHandler" />
+		<passvalue-handler>
+			<before>
+				<output source="['_message'].head.serviceId" target="['_service_id']" />			
+				 <output source="['_F3_inbound_msg_evt_data'].sys_evt_trace_id" target="['_evt_trace_id']" />
+			</before>
+		</passvalue-handler>
+		<handler bean-id="logConfigHandler" />
+		<handler bean-id="flowControlHandler" />
+		<handler bean-id="validateObjectHandler" />
+	</stack>
+
+	<stack id="batch2OnlineStack">
+		<handler bean-id="traceHandler" />
+		<passvalue-handler>
+			<before>
+				<output source="['_message'].bodyData" target="['_in_data']" />
+			</before>
+		</passvalue-handler>
+		<handler bean-id="dumpHandler" />
+		<handler bean-id="businessRecordHandler" />
+		<handler bean-id="inboundDataTransformHandler" />
+		<handler bean-id="inboundInternationalHandler" />
+		<handler bean-id="inboundServiceExceptionHandler" />
+		<passvalue-handler>
+			<before>
+				 <output source="['_F3_inbound_msg_evt_data'].sys_evt_trace_id" target="['_evt_trace_id']" />
+			</before>
+		</passvalue-handler>
+		<handler bean-id="logConfigHandler" />
+		<handler bean-id="validateObjectHandler" />
+	</stack>
+
+	<stack id="batchServiceStack">
+		<handler bean-id="traceHandler" />
+		<passvalue-handler>
+			<before>
+				<output source="['_message'].bodyData" target="['_in_data']" />
+			</before>
+		</passvalue-handler>
+		<handler bean-id="dumpHandler" />
+		<handler bean-id="businessRecordHandler" />
+		<handler bean-id="inboundDataTransformHandler" />
+		<handler bean-id="inboundInternationalHandler" />
+		<handler bean-id="inboundServiceExceptionHandler" />
+		<passvalue-handler>
+			<before>
+				<output source="['_message'].head.serviceId" target="['_service_id']" />			
+				 <output source="['_F3_inbound_msg_evt_data'].sys_evt_trace_id" target="['_evt_trace_id']" />
+			</before>
+		</passvalue-handler>
+		<handler bean-id="logConfigHandler" />
+		<handler bean-id="flowControlHandler" />
+		<handler bean-id="validateObjectHandler" />
+	</stack>
+	
+</handler-stacks>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rules>
+	<rule name="test" description="bean filter test" isSimple="false" relationOp="#1 or (#2 and (not #3) and #4)">
+		<property name="name" 		type="String" 	value="qhli" 	op="equals" />
+		<property name="age" 		type="Numberic" value="20" 		op=">=" />
+		<property name="married" 	type="Boolean" 	value="true" 	op="==" />
+		<property name="birthDay" 	type="Date" 	value="1981-06-01 17:30:00" op="after" />
+	</rule>
+</rules>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mappings>
+
+ <abstract id="databean">
+	<structure node-name="STUDENT" type="com.liqh.commons.datatransform.model.Student" is-wrap="true">
+		<value node-name="ID" field="id" datetype="TextType" is-null="N"/>
+		<value node-name="NAME" field="name" datetype="TextType"/>
+		<value node-name="GENDER_CODE" 	field="gender" 	type="com.liqh.commons.datatransform.model.Gender" datetype="NumericType" handler-type="com.liqh.commons.datatransform.model.GenderHandler"/>
+		<value node-name="ACCOUNT"	field="account" type="java.math.BigDecimal" />
+		<value node-name="AGE"		field="age" 	type="java.lang.Integer" />
+		<value node-name="HEIGHT" 	field="height"	type="java.lang.Float"/>
+		<value node-name="WEIGHT"	field="weight"	type="java.lang.Float"/>
+		<value node-name="BIRTHDAY" field="birthDay" type="java.util.Date" handler="StringToDateHandler"/>
+	
+		<abstract id="abstract-entity-score"/>
+		<abstract id="abstract-entity-no"/>
+		<abstract id="abstract-entity-passed"/>
+	</structure>
+</abstract>	
+	
+<mapping id="testXml2b" auto="ture" parser="xml2BeanParser" transformer="xml2BeanTransformer" validate="true" extends="databean">
+	<value node-name="SCORE" 	field="score" 	type="java.lang.Integer" override="abstract-entity-score"/>
+	<value node-name="NO" 		field="no" 		type="java.lang.String" datetype="TextType" is-null="N"  override="abstract-entity-no"/>	
+	<value node-name="PASSED" 	field="passed" 	type="java.lang.Boolean" datetype="TextType"  override="abstract-entity-passed"/> 
+</mapping>
+
+<mapping id="testXml2b-sample" parser="xml2BeanParser" transformer="xml2BeanTransformer" validate="true">
+	<structure node-name="STUDENT" 	field="root" 	type="com.liqh.commons.datatransform.model.Student" is-wrap="true">
+	 	<value node-name="ID" 		field="id"/>
+	 	<value node-name="NO" 		field="no" 		type="java.lang.String" datetype="TextType" is-null="N"/>
+	 	<value node-name="NAME" 	field="name" 	type="java.lang.String" datetype="TextType"/>
+		<value node-name="PASSED" 	field="passed" 	type="java.lang.Boolean" datetype="TextType"/>
+		<value node-name="SCORE" 	field="score" 	type="java.lang.Integer" datetype="NumericType"/>
+		<value node-name="GENDER_CODE" 	field="gender" 	type="com.liqh.commons.datatransform.model.Gender" datetype="NumericType" handler-type="com.liqh.commons.datatransform.model.GenderHandler"/>
+		<value node-name="ACCOUNT"	field="account" type="java.math.BigDecimal" />
+		<value node-name="AGE"		field="age" 	type="java.lang.Integer" />
+		<value node-name="HEIGHT" 	field="height"	type="java.lang.Float"/>
+		<value node-name="WEIGHT"	field="weight"	type="java.lang.Float"/>
+		<value node-name="BIRTHDAY" field="birthDay" type="java.util.Date" handler="StringToDateHandler"/>
+	</structure>		 
+</mapping>
+ 
+</mappings>	

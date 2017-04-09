@@ -1,0 +1,54 @@
+<rules>
+  <rule>
+    <name>test</name>
+    <description>bean filter test</description>
+    <isSimple>false</isSimple>
+    <relationOp>#1 or (#2 and not #3) and #4</relationOp>
+    <propertyFilterDescriptors>
+      <entry>
+        <string>#1</string>
+        <property>
+          <id>#1</id>
+          <index>#1</index>
+          <propertyName>name</propertyName>
+          <propertyType>String</propertyType>
+          <propertyValue class="string">qhli</propertyValue>
+          <op>equals</op>
+        </property>
+      </entry>
+      <entry>
+        <string>#2</string>
+        <property>
+          <id>#2</id>
+          <index>#2</index>
+          <propertyName>age</propertyName>
+          <propertyType>Numberic</propertyType>
+          <propertyValue class="string">20</propertyValue>
+          <op>>=</op>
+        </property>
+      </entry>
+      <entry>
+        <string>#4</string>
+        <property>
+          <id>#4</id>
+          <index>#4</index>
+          <propertyName>birthDay</propertyName>
+          <propertyType>Date</propertyType>
+          <propertyValue class="string">1981-06-01 17:30:00</propertyValue>
+          <op>after</op>
+        </property>
+      </entry>
+      <entry>
+        <string>#3</string>
+        <property>
+          <id>#3</id>
+          <index>#3</index>
+          <propertyName>married</propertyName>
+          <propertyType>Boolean</propertyType>
+          <propertyValue class="string">false</propertyValue>
+          <op>==</op>
+        </property>
+      </entry>
+    </propertyFilterDescriptors>
+  </rule>
+</rules>

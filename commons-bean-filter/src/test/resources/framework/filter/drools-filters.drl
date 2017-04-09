@@ -1,0 +1,46 @@
+package com.liqh.commons.beanfilter.drools
+
+
+import org.apache.commons.beanutils.BeanUtils
+import org.slf4j.Logger
+import com.liqh.commons.beanfilter.Student
+
+
+
+global Logger _logger
+global FilterVars _vars
+
+
+function void setFilterFlag(Object bean, Logger _logger, FilterVars _vars, Boolean flag){
+	if(bean.getClass().isAnnotationPresent(NeedFilter.class)) {
+		NeedFilter needFilter = bean.getClass().getAnnotation(NeedFilter.class);
+		String fieldName = needFilter.value();
+		if(fieldName != null && !"".equals(fieldName.trim()))
+			try{
+				BeanUtils.setProperty(bean, fieldName, flag);
+			}catch(Exception e){
+				_logger.error(e.getMessage(), e);
+			}
+	}
+	
+	_vars.setFiltered(flag);	
+	_vars.setEndTime(new java.util.Date());
+	_vars.calc();
+}
+
+
+rule "test1"
+when
+	//class.isAnnotationPresent(NeedFilter.class)
+	bean:Student(
+		// 姓名为qhli 或者 年龄大于等于20且未婚且生日在1981-06-01 17:30:00后的		
+		name == 'qhli' || 
+		(
+		age >= 20 && 
+		(married != true) && 
+		birthDay.after(new java.text.SimpleDateFormat('yyyy-MM-dd HH:mm:ss').parse('1981-06-01 17:30:00'))
+		)
+	)
+then	
+	setFilterFlag(bean, _logger, _vars, true);	
+end

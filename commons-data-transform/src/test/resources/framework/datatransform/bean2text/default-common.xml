@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings>
+	<!-- 公共部分
+	segment用于被include
+	segment下可以配置多外template，建议只有配置一个
+	 -->
+	 
+	<segment id="XML_FIRST_LINE">
+		<template>
+		<![CDATA[<?xml version="1.0" encoding="UTF-8"?>]]>
+		</template>
+	</segment>
+	
+	<segment id="transaction">
+		<template><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+		<TX>]]>
+		</template>
+	</segment>
+
+	<segment id="transaction-body">
+		<template><![CDATA[
+		<TX_BODY>]]>
+		</template>
+	</segment>
+
+	<segment id="in-response-common">
+		<template><![CDATA[
+		<COMMON></COMMON>]]>
+		</template>
+	</segment>
+
+	<segment id="in-response-common-begin">
+		<template><![CDATA[
+		<COMMON>]]>
+		</template>
+	</segment>
+
+	<segment id="in-response-common-end">
+		<template><![CDATA[
+		</COMMON]]>
+		</template>
+	</segment>
+
+	<segment id="/transaction-body">
+		<template><![CDATA[
+		</TX_BODY>]]>
+		</template>
+	</segment>
+
+	<segment id="/transaction">
+		<template><![CDATA[
+		</TX>]]>
+		</template>
+	</segment>
+	
+	
+
+</mappings>

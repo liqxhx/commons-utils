@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mappings>
+<!-- +++++++++++++++++++++++++++++++++ -->
+	<segment id="test-entity">
+		<template><![CDATA[
+			<ENTITY>
+			<#setting number_format="0.#########">
+			<#escape x as x!"">
+			<#if _stu??>
+				<ID>${(_stu.id)!}</ID>
+				<NAME>${(_stu.name)!}</NAME>
+				<GENDER><#if _stu.gender??>${_stu.gender}</#if></GENDER>
+				<GENDER_CODE><#if _stu.gender??>${_stu.gender.code}</#if></GENDER_CODE>
+				<GENDER_NAME><#if _stu.gender??>${_stu.gender.sname}</#if></GENDER_NAME>
+				<SCORE>${(_stu.score)!}</SCORE>
+				<WEIGHT><#if _stu.weight??>${_stu.weight?string("0.00")}</#if></WEIGHT>
+				<HEIGHT><#if _stu.height??>${_stu.height?string("0")}</#if>cm</HEIGHT>
+				<ACCOUNT><#if _stu.account??>${_stu.account?string("0.0000")}</#if></ACCOUNT>
+				<BIRTH_DAY><#if _stu.birthDay??>${_stu.birthDay?string("yyyy-MM-dd")}</#if></BIRTH_DAY>
+			</#if>
+			</#escape>
+			</ENTITY>
+		]]></template>
+	</segment> 
+	<mapping id="test2Xml" parser="bean2TextParser" transformer="bean2TextTransformer">
+		<include segment-id="transaction"/>			
+		<include segment-id="transaction-body"/> 
+		<include segment-id="in-response-common"/>
+		<include segment-id="test-entity"/>	
+		<include segment-id="/transaction-body"/>	
+		<include segment-id="/transaction"/>
+	</mapping>
+	
+
+</mappings>	

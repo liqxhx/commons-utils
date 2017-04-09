@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- Bean To Text -->
+	<bean id="bean2TextTransformer" class="datatransform.bean2text.BeanToTextTransformer" />
+	<bean id="bean2TextParser" class="datatransform.bean2text.BeanToTextTemplateRuleParser" />
+
+	<!-- 数据转换注册器 -->
+	<bean id="mappingRegistry" class="datatransform.config.DefaultMappingRegistry" />
+
+	<!-- 数据转换注册器解析器 -->
+	<bean id="mappingConfigParser" class="datatransform.config.XmlConfigurationMappingParser"
+		p:mappingRegistry-ref="mappingRegistry">
+		<property name="configurations">
+			<list>
+				<value>classpath*:datatransform/bean2text/default-common.xml</value>
+				<value>classpath*:datatransform/bean2text/mappings.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 数据转换管理器 -->
+	<bean id="dataTransformManager" class="datatransform.DefaultDataTransformManager"
+		p:mappingRegistry-ref="mappingRegistry">
+	</bean>
+
+
+</beans>
